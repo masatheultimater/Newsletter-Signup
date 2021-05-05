@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  newslettersignup:
+    build: 
+      context: .
+      dockerfile: Dockerfile_${DOCKER_ENV}
+    image: newslettersignup_${DOCKER_ENV}
+    container_name: newslettersignup_${DOCKER_ENV}
+    tty: true
+    ports:
+      - '3000:3000'
+    volumes: 
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+      - ~/.ssh:/root/.ssh
+    environment:
+      APP_ENV: $DOCKER_ENV
